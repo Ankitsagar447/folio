@@ -1,0 +1,170 @@
+/* Marquee Styles */
+.projects-section {
+    padding: var(--spacing-xl) 0;
+    overflow: hidden;
+    background: transparent;
+}
+
+.marquee-track {
+    display: flex;
+    gap: 2rem;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+    /* Slowed down slightly for better viewing */
+    padding-left: 2rem;
+    /* Initial offset */
+}
+
+/* Pause on hover */
+.marquee-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Card Container */
+.project-card {
+    position: relative;
+    width: 380px;
+    /* Wider card as per reference */
+    height: 280px;
+    border-radius: 15px;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transform: translateZ(0);
+    /* Force GPU */
+    flex-shrink: 0;
+}
+
+/* 1. Base Image */
+.card-image-wrapper {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 2. Text Content (Top Layer) */
+.card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    /* Above blurs */
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centered text */
+    text-align: center;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+.card-year {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+    font-family: monospace;
+    /* Matching the mono concept */
+}
+
+.card-title {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #fff;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* 3. Progressive Blur Stack */
+/* This creates the smooth frosted glass gradient effect from bottom up */
+.blur-stack {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+    /* Let clicks pass through */
+}
+
+.blur-layer {
+    position: absolute;
+    inset: 0;
+}
+
+/* 
+   We define 8 layers of blur, masking them to create a gradient of blurriness 
+   that gets stronger towards the bottom.
+*/
+
+/* Layer 1 */
+.blur-layer:nth-child(1) {
+    backdrop-filter: blur(0.5px);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 12.5%, black 25%, transparent 37.5%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12.5%, black 25%, transparent 37.5%);
+}
+
+/* Layer 2 */
+.blur-layer:nth-child(2) {
+    backdrop-filter: blur(1px);
+    mask-image: linear-gradient(to bottom, transparent 12.5%, black 25%, black 37.5%, transparent 50%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 12.5%, black 25%, black 37.5%, transparent 50%);
+}
+
+/* Layer 3 */
+.blur-layer:nth-child(3) {
+    backdrop-filter: blur(2px);
+    mask-image: linear-gradient(to bottom, transparent 25%, black 37.5%, black 50%, transparent 62.5%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 25%, black 37.5%, black 50%, transparent 62.5%);
+}
+
+/* Layer 4 */
+.blur-layer:nth-child(4) {
+    backdrop-filter: blur(4px);
+    mask-image: linear-gradient(to bottom, transparent 37.5%, black 50%, black 62.5%, transparent 75%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 37.5%, black 50%, black 62.5%, transparent 75%);
+}
+
+/* Layer 5 */
+.blur-layer:nth-child(5) {
+    backdrop-filter: blur(8px);
+    mask-image: linear-gradient(to bottom, transparent 50%, black 62.5%, black 75%, transparent 87.5%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 50%, black 62.5%, black 75%, transparent 87.5%);
+}
+
+/* Layer 6 */
+.blur-layer:nth-child(6) {
+    backdrop-filter: blur(16px);
+    mask-image: linear-gradient(to bottom, transparent 62.5%, black 75%, black 87.5%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 62.5%, black 75%, black 87.5%, transparent 100%);
+}
+
+/* Layer 7 */
+.blur-layer:nth-child(7) {
+    backdrop-filter: blur(32px);
+    mask-image: linear-gradient(to bottom, transparent 75%, black 87.5%, black 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 75%, black 87.5%, black 100%);
+}
+
+/* Layer 8 */
+.blur-layer:nth-child(8) {
+    backdrop-filter: blur(64px);
+    mask-image: linear-gradient(to bottom, transparent 87.5%, black 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 87.5%, black 100%);
+}

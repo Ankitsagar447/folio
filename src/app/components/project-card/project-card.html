@@ -1,0 +1,14 @@
+<a [routerLink]="['/projects', id]" class="card-link">
+    <div class="card" [style.background-color]="color">
+        <div class="card-content" [style.color]="textColor">
+            <div class="card-header">
+                <span class="category">{{ category }}</span>
+                <span class="year mono-text">[{{ year }}]</span>
+            </div>
+            <h3 class="card-title">{{ title }}</h3>
+        </div>
+        <div class="card-image-wrapper">
+            <div class="image-placeholder"></div>
+        </div>
+    </div>
+</a>

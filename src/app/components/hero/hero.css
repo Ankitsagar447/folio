@@ -1,0 +1,192 @@
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Center vertically */
+    padding-top: var(--header-height);
+    position: relative;
+    padding-bottom: 0rem;
+}
+
+.hero-content-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+/* 1. Image Wrapper */
+.hero-image-wrapper {
+    margin-bottom: 0rem;
+    display: flex;
+    justify-content: center;
+}
+
+.hero-profile-image {
+    width: 190px;
+    height: auto;
+    display: block;
+    /* User image has white background, no radius needed or maybe small radius if preferred. 
+       Reference shows clean cut. I'll leave it as is or maybe a small radius if it's rectangular.
+       The image provided is a portrait. Let's make it standard. */
+}
+
+/* 2. Typography */
+.hero-text-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-intro {
+    font-family: var(--font-mono);
+    /* Based on ref image ("Hello! I'm") */
+    font-size: 20px;
+    font-weight: 400;
+    color: #383838;
+    margin-bottom: 0rem;
+    letter-spacing: -0.6px;
+    line-height: 28px;
+}
+
+.hero-name {
+    font-family: var(--font-mono);
+    font-size: 45px;
+    font-weight: 300;
+    letter-spacing: -2.25px;
+    line-height: 45px;
+    color: #383838;
+    margin-bottom: 24px;
+    margin-top: 0;
+}
+
+/* 3. Badges Center */
+/* 3. Badges Center */
+/* 3. Badges Center */
+.hero-badges-center {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Spread items apart */
+    width: 400px;
+    max-width: 90%;
+    /* Responsive */
+    margin-bottom: 0rem;
+}
+
+.hero-badges-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    /* Gap between Icon and Pill */
+}
+
+/* Reusing badge styles from previous step */
+.badge-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    /* Lighter grey for icon */
+    width: 20px;
+    height: 20px;
+    transition: opacity 0.2s ease;
+}
+
+.badge-icon:hover {
+    opacity: 0.7;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 3px 12px;
+    background: transparent;
+    border: 1px solid rgba(113, 130, 245, 0.15);
+    /* Much lighter border */
+    border-radius: 100px;
+    color: rgb(113, 130, 245);
+    font-family: var(--font-mono);
+    font-weight: 300;
+    /* Lighter font */
+    font-size: 11px;
+    height: 24px;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    background-color: rgb(113, 130, 245);
+    border-radius: 50%;
+}
+
+.email-link {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: #666;
+    /* Dark grey instead of black */
+    text-decoration: none;
+    font-weight: 400;
+    transition: opacity 0.2s ease;
+}
+
+.email-link:hover {
+    opacity: 0.7;
+    color: #000;
+}
+
+/* 4. Sub Info */
+.hero-sub-info {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    max-width: 90%;
+    /* Constrain width to keep it close */
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: #666;
+    margin-top: 1rem;
+}
+
+/* 5. Bottom Bar */
+.hero-bottom-bar {
+    margin-top: auto;
+    /* Push to bottom */
+    width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: #1A1A1A;
+}
+
+@media (max-width: 768px) {
+    .hero-bottom-bar {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .hero-sub-info {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+/* Separator Line */
+.hero-separator {
+    width: 400px;
+    max-width: 80%;
+    /* Responsive width */
+    height: 1px;
+    background-color: #383838;
+    /* Matches text color */
+    margin: 0 auto .5rem auto;
+    /* Spacing */
+}

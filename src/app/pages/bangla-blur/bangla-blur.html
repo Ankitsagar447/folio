@@ -1,0 +1,26 @@
+<div class="bangla-blur-page" data-framer-name="Canvas" (mousedown)="onMouseDown($event)">
+
+
+
+
+    <main class="blur-content">
+        <div class="hero-text">
+            <h1>Bangla-Blur</h1>
+            <h3>Experimental Bengali Display Typeface</h3>
+            <div class="pill">COMING SOON</div>
+        </div>
+
+        <div class="stamps-container">
+            <div *ngFor="let stamp of stamps" class="stamp-card" [style.zIndex]="stamp.zIndex"
+                [style.transform]="getTransform(stamp)">
+                <img [src]="stamp.image" alt="Stamp Art" loading="lazy">
+            </div>
+        </div>
+    </main>
+
+    <footer class="blur-footer">
+        <div class="scroll-indicator">
+            SCROLL / DRAG TO MOVE
+        </div>
+    </footer>
+</div>

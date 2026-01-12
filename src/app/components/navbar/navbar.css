@@ -1,0 +1,98 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    /* Tighter height */
+    background: transparent;
+    /* Fully transparent initially */
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    transition: background 0.3s ease;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    /* Added subtle border */
+}
+
+/* Optional: Add a slight background on scroll via JS if needed, but ref is transparent/vignette */
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Logo Styles */
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.48px;
+    color: rgb(56, 56, 56);
+}
+
+.logo-text {
+    color: rgb(56, 56, 56);
+}
+
+/* Nav Links - Center */
+.nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nav-links {
+    display: flex;
+    gap: 24px;
+    /* Exact spacing */
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    /* No background on pill in ref */
+}
+
+.nav-links a {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.42px;
+    color: rgb(148, 148, 148);
+    /* Inactive color */
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: rgb(56, 56, 56);
+}
+
+.nav-links li {
+    list-style: none;
+}
+
+/* Time Display */
+.time-display {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    color: rgb(148, 148, 148);
+    font-weight: 400;
+    letter-spacing: -0.6px;
+    background: transparent;
+}
+
+@media (max-width: 768px) {
+    .nav-center {
+        display: none;
+    }
+}

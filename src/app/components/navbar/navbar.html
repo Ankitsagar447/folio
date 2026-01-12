@@ -1,0 +1,25 @@
+<nav class="navbar">
+    <div class="container navbar-container">
+        <div class="nav-left">
+            <a routerLink="/" class="logo-wrapper">
+                <span class="logo-text">Ankit Sagar</span>
+            </a>
+        </div>
+
+        <div class="nav-center">
+            <ul class="nav-links">
+                <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+                <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+                <li><a routerLink="/work" routerLinkActive="active">Work</a></li>
+                <li><a routerLink="/projects/bangla-blur" routerLinkActive="active">Bangla Blur</a></li>
+                <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-right">
+            <span class="mono-text time-display">
+                {{ currentTime() | date:'dd MMM HH:mm:ss' }} (IST)
+            </span>
+        </div>
+    </div>
+</nav>

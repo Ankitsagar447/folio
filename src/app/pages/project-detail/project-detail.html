@@ -1,0 +1,18 @@
+<div class="project-detail container">
+    <div class="header">
+        <a routerLink="/" class="back-link">← Back to Home</a>
+    </div>
+
+    <article>
+        <h1 class="project-title">{{ projectId | titlecase }}</h1>
+        <div class="placeholder-content">
+            <p>This is a placeholder for the case study of <strong>{{ projectId }}</strong>.</p>
+            <p>In a real implementation, this would contain the rich text, images, and videos describing the project.
+            </p>
+        </div>
+
+        <div class="image-block"></div>
+        <div class="text-block"></div>
+        <div class="image-block"></div>
+    </article>
+</div>

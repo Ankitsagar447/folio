@@ -1,0 +1,59 @@
+<section class="projects-section">
+    <div class="marquee-track">
+        <!-- Original List -->
+        @for (project of projects; track project.id) {
+        <a href="javascript:void(0)" class="project-card">
+            <!-- 1. Text Content -->
+            <div class="card-content">
+                <div class="card-year">[{{ project.year }}]</div>
+                <h2 class="card-title">{{ project.title }}</h2>
+            </div>
+
+            <!-- 2. Blur Stack (Progressive Blur) -->
+            <div class="blur-stack">
+                <div class="blur-layer"></div>
+                <div class="blur-layer"></div>
+                <div class="blur-layer"></div>
+                <div class="blur-layer"></div>
+                <div class="blur-layer"></div>
+                <div class="blur-layer"></div>
+                <div class="blur-layer"></div>
+                <div class="blur-layer"></div>
+            </div>
+
+            <!-- 3. Base Image -->
+            <div class="card-image-wrapper">
+                <img [src]="project.image" [alt]="project.title" class="card-image">
+            </div>
+        </a>
+        }
+
+        <!-- Duplicated List for Infinite Loop -->
+        @for (project of projects; track project.id + '_dup') {
+        <a href="javascript:void(0)" class="project-card">
+            <!-- 1. Text Content -->
+            <div class="card-content">
+                <div class="card-year">[{{ project.year }}]</div>
+                <h2 class="card-title">{{ project.title }}</h2>
+            </div>
+
+            <!-- 2. Blur Stack (Progressive Blur) -->
+            <div class="blur-stack">
+                <div class="blur-layer"></div>
+                <div class="blur-layer"></div>
+                <div class="blur-layer"></div>
+                <div class="blur-layer"></div>
+                <div class="blur-layer"></div>
+                <div class="blur-layer"></div>
+                <div class="blur-layer"></div>
+                <div class="blur-layer"></div>
+            </div>
+
+            <!-- 3. Base Image -->
+            <div class="card-image-wrapper">
+                <img [src]="project.image" [alt]="project.title" class="card-image">
+            </div>
+        </a>
+        }
+    </div>
+</section>

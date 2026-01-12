@@ -1,0 +1,133 @@
+.contact-section {
+    padding-top: 15vh;
+    padding-bottom: 5rem;
+    min-height: 80vh;
+}
+
+.contact-content {
+    width: 100%;
+    /* Target container is wide (~985px), removing restrictive max-width */
+    max-width: 1000px;
+    margin: 0;
+}
+
+.contact-heading {
+    font-family: var(--font-mono);
+    font-size: 45px;
+    /* Exact match */
+    font-weight: 300;
+    color: #383838;
+    margin-bottom: 0.5rem;
+    /* Reduced from 2rem, target has 0 but we need visual separation from intro */
+    letter-spacing: -2.25px;
+    /* Exact match */
+    line-height: 1;
+}
+
+.contact-intro {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    /* Exact match */
+    color: #949494;
+    /* Exact match */
+    line-height: 1.4;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    font-weight: 400;
+}
+
+.email-social-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.contact-email {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: #383838;
+    text-decoration: none;
+}
+
+.social-link {
+    color: #999;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.social-link:hover {
+    color: #333;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    /* Exact match */
+    width: 100%;
+}
+
+.form-group {
+    width: 100%;
+}
+
+.form-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #E5E5E5;
+    padding: 8px 0 6px 0;
+    /* Adjusted to match target padding style */
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    /* Exact match */
+    color: #383838;
+    background: transparent;
+    outline: none;
+    transition: border-color 0.2s;
+    border-radius: 0;
+    height: 34px;
+    /* ~33.2px */
+}
+
+.form-input::placeholder {
+    color: #949494;
+    /* Match intro color for consistency */
+}
+
+.form-input:focus {
+    border-bottom-color: #333;
+}
+
+.message-input {
+    resize: none;
+    min-height: 34px;
+    overflow-y: hidden;
+}
+
+.submit-btn {
+    align-self: flex-start;
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    color: #383838;
+    /* Exact match */
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    letter-spacing: -0.48px;
+    /* Exact match */
+}
+
+.submit-btn:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .contact-heading {
+        font-size: 2.5rem;
+        letter-spacing: -1px;
+    }
+}

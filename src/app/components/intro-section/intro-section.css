@@ -1,0 +1,199 @@
+.intro-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    font-family: var(--font-primary);
+}
+
+/* Bio Text */
+.bio-text {
+    font-family: 'Inter', sans-serif;
+    /* Explicitly setting Inter for body text purity */
+    font-size: 1.5rem;
+    /* Larger, statement-like text */
+    color: #383838;
+    line-height: 1.6;
+    font-weight: 300;
+    max-width: 100%;
+    text-align: left;
+    /* Left align looks cleaner for large statement text */
+    letter-spacing: -0.02em;
+}
+
+.highlight {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    color: #111;
+    position: relative;
+    display: inline-block;
+}
+
+/* Optional: Add a subtle underline for highlights */
+.highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background-color: rgba(113, 130, 245, 0.15);
+    /* Subtle blue tint */
+    z-index: -1;
+    transform: rotate(-1deg);
+}
+
+/* Gradient text adjustments */
+.gradient-text-small {
+    font-weight: 600;
+    background: linear-gradient(135deg, #2563eb, #9333ea);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Badges */
+.badge-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 6px;
+    /* Slightly squarer than pill for tech feel */
+    padding: 0.35rem 0.85rem;
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    background: #f8f9fa;
+    color: #4b5563;
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s ease;
+}
+
+.badge:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-color: #d1d5db;
+    color: #111;
+}
+
+/* Specific badge colors if you want them */
+.badge-blue {
+    background: rgba(59, 130, 246, 0.05);
+    color: #2563eb;
+    border-color: rgba(59, 130, 246, 0.2);
+}
+
+.badge-orange {
+    background: rgba(249, 115, 22, 0.05);
+    color: #ea580c;
+    border-color: rgba(249, 115, 22, 0.2);
+}
+
+/* Tech Stack Chips */
+.chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding-top: 0.5rem;
+    border-top: 1px valid #eee;
+    /* Visual separator maybe? Removing for cleaner look. */
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 4px;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    background-color: transparent;
+    border: 1px solid #e5e5e5;
+    color: #666;
+    transition: all 0.2s;
+    cursor: default;
+}
+
+.chip:hover {
+    border-color: #333;
+    color: #111;
+}
+
+/* CTA */
+.cta-group {
+    margin-top: 1.5rem;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 3.25rem;
+    padding: 0 1.5rem;
+    border-radius: 50px;
+    /* Full pill shape */
+    background-color: #111;
+    color: white;
+    font-size: 0.95rem;
+    font-family: var(--font-primary);
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    background-color: #000;
+}
+
+.arrow-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    transition: transform 0.2s;
+}
+
+.cta-button:hover .arrow-icon {
+    transform: translateX(4px);
+}
+
+/* Social Links */
+.social-group {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.social-link {
+    color: #a3a3a3;
+    /* Subtler default state */
+    transition: all 0.2s;
+}
+
+.social-link:hover {
+    color: #111;
+    transform: translateY(-2px);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .intro-container {
+        padding: 2rem 1.5rem;
+        gap: 2rem;
+    }
+
+    .bio-text {
+        font-size: 1.25rem;
+    }
+}

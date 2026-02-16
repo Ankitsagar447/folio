@@ -20,7 +20,7 @@ export class App {
 
   protected readonly title = signal('portfolio-app');
 
-  isBanglaBlur(): boolean {
-    return this.router.url.includes('bangla-blur');
+  isHobbies(): boolean {
+    return this.router.url.includes('hobbies');
   }
 }

@@ -12,13 +12,13 @@ interface Stamp {
 }
 
 @Component({
-    selector: 'app-bangla-blur',
+    selector: 'app-hobbies',
     standalone: true,
     imports: [CommonModule],
-    templateUrl: './bangla-blur.html',
-    styleUrls: ['./bangla-blur.css']
+    templateUrl: './hobbies.html',
+    styleUrls: ['./hobbies.css']
 })
-export class BanglaBlur implements OnDestroy {
+export class Hobbies implements OnDestroy {
     currentTime = signal(new Date());
 
     // Infinite Canvas State

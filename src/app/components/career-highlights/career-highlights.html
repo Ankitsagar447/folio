@@ -1,0 +1,13 @@
+<section class="highlights-section">
+    <div class="highlights-container">
+        <h2 class="section-title">Career Highlights</h2>
+        <div class="highlights-grid">
+            @for (item of highlights; track item.label) {
+            <div class="highlight-card">
+                <div class="stat-value">{{ item.value }}</div>
+                <div class="stat-label">{{ item.label }}</div>
+            </div>
+            }
+        </div>
+    </div>
+</section>

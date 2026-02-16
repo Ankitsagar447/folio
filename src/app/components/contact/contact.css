@@ -131,3 +131,18 @@
         letter-spacing: -1px;
     }
 }
+
+.result-message {
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: #383838;
+}
+
+.result-message.success {
+    color: #2e7d32;
+}
+
+.result-message.error {
+    color: #d32f2f;
+}

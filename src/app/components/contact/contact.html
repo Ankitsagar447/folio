@@ -10,7 +10,7 @@
             <a href="mailto:sagarankit000@gmail.com" class="contact-email">
                 sagarankit000@gmail.com
             </a>
-            <a href="https://www.linkedin.com/in/ankitsagar/" target="_blank" rel="noopener noreferrer"
+            <a href="https://www.linkedin.com/in/sagarankit000/" target="_blank" rel="noopener noreferrer"
                 class="social-link" aria-label="LinkedIn">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
@@ -23,7 +23,8 @@
             </a>
         </div>
 
-        <form class="contact-form">
+        <form (submit)="onSubmit($event)" class="contact-form">
+            <input type="hidden" name="access_key" value="e4b1e701-3819-4d52-9bb2-e027de8995cb">
             <div class="form-group">
                 <label for="name" class="sr-only">Name</label>
                 <input type="text" id="name" name="name" placeholder="Name*" required class="form-input">
@@ -45,7 +46,9 @@
                     rows="1"></textarea>
             </div>
 
-            <button type="submit" class="submit-btn">Send Message</button>
+            <button type="submit" class="submit-btn" [disabled]="isSubmitting">Send Message</button>
+            <p *ngIf="resultMessage" class="result-message" [class.success]="isSuccess" [class.error]="!isSuccess">{{
+                resultMessage }}</p>
         </form>
     </div>
 </section>

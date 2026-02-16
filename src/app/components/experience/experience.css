@@ -1,0 +1,165 @@
+.experience-section {
+    padding: 80px 0;
+    width: 100%;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-heading {
+    font-family: "Geist Mono", "JetBrains Mono", monospace;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    color: #0a0a0a;
+    margin: 0px 0 20px 0;
+}
+
+.experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.experience-card {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 32px;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.experience-card:hover {
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+    border-color: #cbd5e1;
+    transform: translateY(-2px);
+}
+
+/* Header */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.role-title {
+    font-family: "Geist Mono", "JetBrains Mono", monospace;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: #0a0a0a;
+    margin: 0px 0px 0px 0;
+}
+
+.company-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #949494;
+    /* Blue 600 */
+    margin-top: 2px;
+}
+
+.location-text {
+    font-family: 'Geist Mono', 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: #737373;
+    /* Neutral 500 */
+    margin-top: 4px;
+}
+
+/* Period Badge */
+.header-right {
+    flex-shrink: 0;
+}
+
+.period-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Geist Mono', 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #737373;
+    /* Optional: background for badge look */
+    /* background: #f5f5f5; */
+    /* padding: 4px 8px; */
+    /* border-radius: 6px; */
+}
+
+.calendar-icon {
+    color: #9ca3af;
+}
+
+/* Content */
+/* Content */
+.project-name {
+    font-family: "Geist Mono", "JetBrains Mono", monospace;
+    font-size: 15px;
+    color: #171717;
+    margin-bottom: 12px;
+}
+
+.responsibilities-list {
+    font-family: "Geist Mono", "JetBrains Mono", monospace;
+    font-size: 12px;
+    margin: 0 0 24px 0;
+    padding-left: 20px;
+    color: #525252;
+    line-height: 1.6;
+}
+
+.responsibilities-list li {
+    margin-bottom: 6px;
+}
+
+/* Skills Tags */
+.skills-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    font-family: 'Geist Mono', 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: #404040;
+    background: #ffffff;
+    transition: all 0.2s;
+}
+
+.experience-card:hover .skill-tag {
+    background: #fafafa;
+    border-color: #d4d4d4;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .card-header {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .experience-card {
+        padding: 24px;
+    }
+}

@@ -5,12 +5,12 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 4rem 2rem;
-    font-family: var(--font-primary);
+    font-family: var(--font-mono);
 }
 
 /* Bio Text */
 .bio-text {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-mono);
     /* Explicitly setting Inter for body text purity */
     font-size: 1.5rem;
     /* Larger, statement-like text */
@@ -24,7 +24,7 @@
 }
 
 .highlight {
-    font-family: var(--font-primary);
+    font-family: var(--font-mono);
     font-weight: 600;
     color: #111;
     position: relative;
@@ -144,7 +144,7 @@
     background-color: #111;
     color: white;
     font-size: 0.95rem;
-    font-family: var(--font-primary);
+    font-family: var(--font-mono);
     font-weight: 500;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);

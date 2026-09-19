@@ -1,3 +1,4 @@
 [build]
+  base = "client"
   publish = "dist/portfolio-app/browser"
   command = "npm run build"

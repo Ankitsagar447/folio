@@ -72,10 +72,16 @@ const DEFAULT_MEMORIES: TravelMemory[] = [
 
 const STORAGE_KEY = 'portfolio-travel-memories';
 
-@Injectable({ providedIn: 'root' })
-export class TravelChroniclesService {
-  memories = signal<TravelMemory[]>(this.loadMemories());
+import { getApiUrl } from './api.config';
 
+@Injectable({
+  providedIn: 'root'
+})
+export class TravelChroniclesService {
+  // Master travel memory signals
+  memories = signal<TravelMemory[]>([]);
+
+  // Computed mappings
   memoriesByState = computed(() => {
     const map = new Map<string, TravelMemory[]>();
     for (const mem of this.memories()) {
@@ -89,7 +95,9 @@ export class TravelChroniclesService {
 
   exploredStatesCount = computed(() => this.memoriesByState().size);
 
-  private readonly API_URL = 'http://localhost:3000/api/memories';
+  private get apiUrl(): string {
+    return getApiUrl('/api/memories');
+  }
 
   constructor() {
     this.syncFromBackend();
@@ -97,7 +105,7 @@ export class TravelChroniclesService {
 
   private async syncFromBackend() {
     try {
-      const res = await fetch(this.API_URL);
+      const res = await fetch(this.apiUrl);
       if (res.ok) {
         const data = await res.json();
         if (Array.isArray(data) && data.length > 0) {
@@ -150,7 +158,7 @@ export class TravelChroniclesService {
     this.persist();
 
     // Async sync to backend
-    fetch(this.API_URL, {
+    fetch(this.apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newMemory)
@@ -164,7 +172,7 @@ export class TravelChroniclesService {
     this.persist();
 
     // Async sync to backend
-    fetch(`${this.API_URL}/${id}`, {
+    fetch(`${this.apiUrl}/${id}`, {
       method: 'DELETE'
     }).catch(() => {});
   }
@@ -174,7 +182,7 @@ export class TravelChroniclesService {
     this.persist();
 
     // Async sync to backend
-    fetch(`${this.API_URL}/reset`, {
+    fetch(`${this.apiUrl}/reset`, {
       method: 'POST'
     }).catch(() => {});
   }

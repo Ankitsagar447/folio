@@ -1,17 +1,18 @@
 /**
- * Centralized API configuration for dual-mode execution (Localhost & Render).
- * 
+ * Centralized API configuration for dual-mode execution (Localhost & Render/Netlify).
+ *
  * - In local development (localhost / 127.0.0.1): Uses http://localhost:3000
- * - On Render / Cloud production: Uses relative path '/api/...' if hosted together,
- *   or an optional remote backend URL if hosted separately.
+ * - In production (Netlify / Cloud): Uses https://folio-6x1g.onrender.com
  */
+
+export const RENDER_BACKEND_URL = 'https://folio-6x1g.onrender.com';
 
 export function getApiBaseUrl(): string {
   if (typeof window === 'undefined') {
-    return '';
+    return RENDER_BACKEND_URL;
   }
 
-  // 1. Check for manual runtime override (useful for debugging or decoupled hosting)
+  // 1. Check for manual runtime override (via localStorage if needed)
   const runtimeOverride = localStorage.getItem('PORTFOLIO_API_URL');
   if (runtimeOverride) {
     return runtimeOverride.replace(/\/$/, '');
@@ -23,10 +24,13 @@ export function getApiBaseUrl(): string {
     return 'http://localhost:3000';
   }
 
-  // 3. Cloud / Render production
-  // When deployed as a unified Web Service on Render or behind a reverse proxy,
-  // relative URLs ('') route directly to the same host with zero CORS overhead.
-  return '';
+  // 3. If running on Render itself (same domain)
+  if (window.location.origin === RENDER_BACKEND_URL) {
+    return '';
+  }
+
+  // 4. Live production on Netlify or custom domain
+  return RENDER_BACKEND_URL;
 }
 
 /**

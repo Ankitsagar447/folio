@@ -10,12 +10,11 @@ import { CommonModule } from '@angular/common';
 })
 export class CareerHighlights {
     highlights = [
-        { value: '3.5+', label: 'Years of Experience' },
-        { value: '7+', label: 'Projects Delivered' },
-        { value: '4', label: 'Certifications' },
-        { value: '9+', label: 'Technologies Mastered' },
-        { value: '85%', label: 'Test Coverage Achieved' },
-        { value: '70%', label: 'Downtime Reduction' },
-        { value: '35%', label: 'Performance Improvement' }
+        { value: '4+', label: 'Years of Experience' },
+        { value: '4', label: 'Enterprise Platforms' },
+        { value: '1,000+', label: 'Businesses Supported' },
+        { value: '90+', label: 'Lighthouse Score' },
+        { value: 'v2–v21', label: 'Angular Depth' },
+        { value: '100%', label: 'Pixel-Perfect Delivery' }
     ];
 }

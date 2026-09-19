@@ -197,3 +197,82 @@
         font-size: 1.25rem;
     }
 }
+
+@media (max-width: 480px) {
+    .bio-text {
+        font-size: 1.1rem;
+    }
+
+    .intro-container {
+        padding: 1.5rem 1rem;
+    }
+}
+
+/* =============================================
+   DARK MODE — Intro Section
+   ============================================= */
+
+[data-theme="dark"] .bio-text {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .highlight {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .highlight::after {
+    background-color: rgba(99, 102, 241, 0.2);
+}
+
+[data-theme="dark"] .gradient-text-small {
+    background: linear-gradient(135deg, #a5b4fc, #c084fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+[data-theme="dark"] .badge {
+    background: rgba(30, 41, 59, 0.8);
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .badge:hover {
+    color: var(--text-primary);
+    border-color: var(--accent-color);
+    background: rgba(99, 102, 241, 0.1);
+}
+
+[data-theme="dark"] .badge-blue {
+    background: rgba(99, 102, 241, 0.1);
+    color: #a5b4fc;
+    border-color: rgba(99, 102, 241, 0.25);
+}
+
+[data-theme="dark"] .chip {
+    border-color: var(--border-color);
+    color: var(--text-muted);
+}
+
+[data-theme="dark"] .chip:hover {
+    border-color: var(--accent-color);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .cta-button {
+    background-color: var(--accent-color);
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+}
+
+[data-theme="dark"] .cta-button:hover {
+    background-color: var(--accent-hover);
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.5);
+}
+
+[data-theme="dark"] .social-link {
+    color: var(--text-muted);
+}
+
+[data-theme="dark"] .social-link:hover {
+    color: #a5b4fc;
+}

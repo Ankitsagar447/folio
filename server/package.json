@@ -1,0 +1,21 @@
+{
+  "name": "portfolio-backend-server",
+  "version": "1.0.0",
+  "description": "Express + MySQL REST API for Ankit Sagar Portfolio Travel Chronicles & Admin Studio",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node src/index.js"
+  },
+  "keywords": ["express", "mysql", "portfolio", "admin"],
+  "author": "Ankit Sagar",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.3.1",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.16.2"
+  }
+}

@@ -1,6 +1,7 @@
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule, DatePipe } from '@angular/common';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,10 @@ import { CommonModule, DatePipe } from '@angular/common';
   styleUrl: './navbar.css'
 })
 export class Navbar implements OnInit, OnDestroy {
+  readonly themeService = inject(ThemeService);
+
   currentTime = signal(new Date());
+  isMobileMenuOpen = signal(false);
   private timer: any;
 
   ngOnInit() {
@@ -21,5 +25,13 @@ export class Navbar implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.timer) clearInterval(this.timer);
+  }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen.set(!this.isMobileMenuOpen());
+  }
+
+  closeMobileMenu() {
+    this.isMobileMenuOpen.set(false);
   }
 }

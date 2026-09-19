@@ -1,18 +1,58 @@
 <div class="project-detail container">
-    <div class="header">
-        <a routerLink="/" class="back-link">← Back to Home</a>
+    <div class="nav-bar-back">
+        <a routerLink="/work" class="back-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m15 18-6-6 6-6"/>
+            </svg>
+            Back to Work & Experience
+        </a>
     </div>
 
-    <article>
-        <h1 class="project-title">{{ projectId | titlecase }}</h1>
-        <div class="placeholder-content">
-            <p>This is a placeholder for the case study of <strong>{{ projectId }}</strong>.</p>
-            <p>In a real implementation, this would contain the rich text, images, and videos describing the project.
-            </p>
-        </div>
+    @if (project) {
+    <article class="case-study">
+        <header class="case-header">
+            <div class="meta-row">
+                <span class="category-tag">{{ project.category }}</span>
+                <span class="year-tag mono-text">[{{ project.year }}]</span>
+            </div>
 
-        <div class="image-block"></div>
-        <div class="text-block"></div>
-        <div class="image-block"></div>
+            <h1 class="case-title">{{ project.title }}</h1>
+            <div class="case-company mono-text">{{ project.company }} &bull; <span>{{ project.role }}</span></div>
+        </header>
+
+        <section class="case-section">
+            <h2 class="section-title">Project Overview</h2>
+            <p class="case-description">{{ project.description }}</p>
+        </section>
+
+        <section class="case-section">
+            <h2 class="section-title">Key Architectural Features & Contributions</h2>
+            <ul class="highlights-list">
+                @for (item of project.highlights; track item) {
+                <li class="highlight-item">
+                    <span class="bullet-icon">✦</span>
+                    <span>{{ item }}</span>
+                </li>
+                }
+            </ul>
+        </section>
+
+        <section class="case-section">
+            <h2 class="section-title">Technology Stack</h2>
+            <div class="tech-grid">
+                @for (tech of project.technologies; track tech) {
+                <div class="tech-card">
+                    <span class="tech-name mono-text">{{ tech }}</span>
+                </div>
+                }
+            </div>
+        </section>
+
+        <div class="case-footer">
+            <a routerLink="/work" class="btn-return">Explore More Projects</a>
+            <a href="mailto:sagarankit000@gmail.com" class="btn-contact">Discuss Similar Platform</a>
+        </div>
     </article>
+    }
 </div>

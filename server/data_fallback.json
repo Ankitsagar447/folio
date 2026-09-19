@@ -1,0 +1,133 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@portfolio.com",
+      "password_hash": "$2a$10$cLdFWni9k6KtxfCrLDzqTOmRB.wygfSKfDMRa2XZQY683GX7yPlDO",
+      "name": "Ankit Sagar",
+      "role": "administrator",
+      "created_at": "2026-09-19T12:38:24.619Z"
+    }
+  ],
+  "memories": [
+    {
+      "id": "mem-rajasthan",
+      "stateId": "rj",
+      "stateName": "Rajasthan",
+      "title": "Rajasthan — Desert Majesty",
+      "month": "November",
+      "tag": "Golden Hour & Royal Heritage",
+      "image": "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1400&q=80",
+      "caption": "Roamed the pink corridors of Hawa Mahal, walked along the massive battlements of Amer Fort at dusk, and savored steaming Pyaaz Kachoris while watching the desert sun sink beneath the horizon.",
+      "moments": [
+        "🏰 Amber Palace",
+        "🏜️ Thar Dunes",
+        "☕ Masala Chai",
+        "📸 Pink City Vistas"
+      ],
+      "createdAt": 1700000000000
+    },
+    {
+      "id": "mem-himachal",
+      "stateId": "hp",
+      "stateName": "Himachal Pradesh",
+      "title": "Himachal Pradesh — High Valleys",
+      "month": "January",
+      "tag": "Snow Peaks & Valleys",
+      "image": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1400&q=80",
+      "caption": "Waking up in Spiti and Manali surrounded by crisp pine-scented mountain air, winding Himalayan highways, high-altitude cedar forests, and freezing fresh river streams.",
+      "moments": [
+        "🏔️ Atal Tunnel",
+        "🌲 Parvati Valley",
+        "🥟 Steamed Momos",
+        "❄️ Solang Pass"
+      ],
+      "createdAt": 1700000001000
+    },
+    {
+      "id": "mem-delhi",
+      "stateId": "dl",
+      "stateName": "Delhi",
+      "title": "Delhi NCR — Living History",
+      "month": "March",
+      "tag": "Heritage & Vibrant Streets",
+      "image": "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1400&q=80",
+      "caption": "Evening breeze at India Gate, soulful Qawwalis echoing through Nizamuddin Dargah, and late-night culinary expeditions through the labyrinth alleyways of Old Delhi.",
+      "moments": [
+        "🏛️ India Gate",
+        "🍛 Chandni Chowk",
+        "🚇 Metro Expeditions",
+        "🌿 Lodhi Art District"
+      ],
+      "createdAt": 1700000002000
+    },
+    {
+      "id": "mem-bihar",
+      "stateId": "br",
+      "stateName": "Bihar",
+      "title": "Bihar — Ancient Wisdom",
+      "month": "December",
+      "tag": "Roots & Sacred Solitude",
+      "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1400&q=80",
+      "caption": "Quiet contemplation beneath the Mahabodhi Tree in Bodh Gaya, tracing ancient history across the ruins of Nalanda University, and traditional authentic Litti Chokha over wood fires.",
+      "moments": [
+        "🕊️ Bodh Gaya",
+        "📜 Nalanda Ruins",
+        "🍲 Litti Chokha",
+        "🌅 Ganga River Ghats"
+      ],
+      "createdAt": 1700000003000
+    },
+    {
+      "id": "mem-goa",
+      "stateId": "ga",
+      "stateName": "Goa",
+      "title": "Goa — Coastal Sunset",
+      "month": "October",
+      "tag": "Coastal Sunset & Bohemian Vibe",
+      "image": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1400&q=80",
+      "caption": "Renting a scooter along the palm-fringed coastal backroads of South Goa, watching dramatic Arabian Sea sunsets, and discovering quiet Portuguese architecture in Fontainhas.",
+      "moments": [
+        "🌊 Palolem Beach",
+        "🛵 Coast Cruising",
+        "🍤 Coastal Cafes",
+        "🌴 Chapora Fort"
+      ],
+      "createdAt": 1700000004000
+    },
+    {
+      "id": "mem-kerala",
+      "stateId": "kl",
+      "stateName": "Kerala",
+      "title": "Kerala — God's Own Country",
+      "month": "August",
+      "tag": "God's Own Country",
+      "image": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1400&q=80",
+      "caption": "Drifting gently through misty Alleppey backwaters on a wooden houseboat, walking across emerald tea plantations in Munnar, and tasting fresh traditional appams with stew.",
+      "moments": [
+        "🛶 Alleppey Houseboat",
+        "🍃 Munnar Tea Hills",
+        "🥥 Fresh Toddy & Stew",
+        "🌧️ Monsoon Mist"
+      ],
+      "createdAt": 1700000005000
+    },
+    {
+      "id": "mem-ladakh",
+      "stateId": "la",
+      "stateName": "Ladakh",
+      "title": "Ladakh — The Land of High Passes",
+      "month": "July",
+      "tag": "High Altitude & Mystic Lakes",
+      "image": "https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?auto=format&fit=crop&w=1400&q=80",
+      "caption": "Crossing Khardung La Pass at 17,982 ft, watching azure reflections across the sacred waters of Pangong Tso, and gazing at prayer flags fluttering outside ancient Thiksey Monastery.",
+      "moments": [
+        "🏔️ Khardung La Pass",
+        "🌊 Pangong Tso Lake",
+        "🛕 Thiksey Monastery",
+        "🐫 Nubra Valley"
+      ],
+      "createdAt": 1700000006000
+    }
+  ]
+}

@@ -1,12 +1,41 @@
-/* You can add global styles to this file, and also import other style files */
+/* ====================================================
+   GLOBAL STYLES — PORTFOLIO (Ankit Sagar)
+   Light + Dark Theme Tokens + Responsive Base
+   ==================================================== */
+
+/* ---- Google Fonts ---- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+/* =============================================
+   LIGHT THEME (default)
+   ============================================= */
 :root {
   /* Colors */
   --bg-color: #FFFFFF;
+  --bg-secondary: #F8FAFC;
   --text-primary: #1A1A1A;
   --text-secondary: #666666;
+  --text-muted: #949494;
   --accent-color: #0047FF;
+  --accent-hover: #0037cc;
   --border-color: #E5E5E5;
+  --border-accent: rgba(0, 71, 255, 0.15);
   --card-bg: #F5F5F5;
+  --card-surface: #FFFFFF;
+  --card-hover: #FAFAFA;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.1);
+  --shadow-accent: 0 4px 14px rgba(0, 71, 255, 0.3);
+  --navbar-bg: rgba(255, 255, 255, 0.92);
+  --navbar-border: rgba(0, 0, 0, 0.06);
+  --nav-link-color: rgb(148, 148, 148);
+  --nav-link-active: rgb(56, 56, 56);
+  --logo-color: rgb(56, 56, 56);
+  --time-color: rgb(148, 148, 148);
+  --switcher-bg: rgba(255, 255, 255, 0.92);
+  --switcher-border: rgba(0, 71, 255, 0.14);
+  --glow-accent: rgba(0, 71, 255, 0.06);
 
   /* Typography */
   --font-primary: 'Inter', sans-serif;
@@ -14,19 +43,57 @@
 
   /* Spacing & Layout */
   --container-width: 95vw;
-  /* Fluid layout */
-  --header-height: 80px;
-  /* Reduced from 100px to match reference 44px + spacing */
+  --header-height: 60px;
   --spacing-sm: 1rem;
   --spacing-md: 2rem;
   --spacing-lg: 5rem;
   --spacing-xl: 10rem;
 }
 
-* {
+/* =============================================
+   DARK THEME — "Neon Slate"
+   ============================================= */
+[data-theme="dark"] {
+  --bg-color: #0a0f1e;
+  --bg-secondary: #0f1629;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent-color: #6366f1;
+  --accent-hover: #4f46e5;
+  --border-color: rgba(99, 102, 241, 0.18);
+  --border-accent: rgba(99, 102, 241, 0.3);
+  --card-bg: rgba(30, 42, 58, 0.7);
+  --card-surface: rgba(17, 24, 39, 0.9);
+  --card-hover: rgba(30, 42, 58, 0.95);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.5);
+  --shadow-lg: 0 12px 50px rgba(0,0,0,0.6);
+  --shadow-accent: 0 4px 20px rgba(99, 102, 241, 0.4);
+  --navbar-bg: rgba(10, 15, 30, 0.92);
+  --navbar-border: rgba(99, 102, 241, 0.12);
+  --nav-link-color: #64748b;
+  --nav-link-active: #e2e8f0;
+  --logo-color: #e2e8f0;
+  --time-color: #64748b;
+  --switcher-bg: rgba(17, 24, 39, 0.95);
+  --switcher-border: rgba(99, 102, 241, 0.2);
+  --glow-accent: rgba(99, 102, 241, 0.08);
+
+  color-scheme: dark;
+}
+
+/* =============================================
+   BASE RESET & DEFAULTS
+   ============================================= */
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -35,6 +102,9 @@ body {
   color: var(--text-primary);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
 }
 
 a {
@@ -53,6 +123,14 @@ button {
   font-family: inherit;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* =============================================
+   LAYOUT UTILITIES
+   ============================================= */
 .container {
   max-width: var(--container-width);
   margin: 0 auto;
@@ -60,7 +138,19 @@ button {
   width: 100%;
 }
 
-/* Utilities */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+  :root {
+    --spacing-md: 1rem;
+    --spacing-lg: 3rem;
+  }
+}
+
+/* =============================================
+   TYPOGRAPHY UTILITIES
+   ============================================= */
 .mono-text {
   font-family: var(--font-mono);
 }
@@ -75,4 +165,29 @@ button {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* =============================================
+   THEME TRANSITION
+   ============================================= */
+*, *::before, *::after {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.2s ease, box-shadow 0.3s ease;
+}
+
+/* But NOT transform transitions (would break animations) */
+.stamp-card, .map-pedestal-3d, .travel-card, .state-polygon {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              fill 0.22s ease,
+              stroke 0.22s ease,
+              opacity 0.4s ease;
+}
+
+/* Hide project navbar and footer on all admin pages */
+body:has(.admin-page) app-navbar,
+body:has(.admin-login-wrapper) app-navbar,
+body:has(.admin-page) app-footer,
+body:has(.admin-login-wrapper) app-footer,
+body:has(.admin-layout) app-navbar,
+body:has(.admin-layout) app-footer {
+  display: none !important;
 }

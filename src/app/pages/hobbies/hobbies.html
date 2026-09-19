@@ -1,22 +1,390 @@
-<div class="hobbies-page" data-framer-name="Canvas" (mousedown)="onMouseDown($event)">
+<div class="hobbies-page" [class.mode-states]="viewMode() === 'states'" [class.mode-canvas]="viewMode() === 'canvas'"
+    (mousedown)="onMouseDown($event)">
+
+    <!-- ================================================================= -->
+    <!-- TOP VIEW MODE SWITCHER & ADMIN BAR                                -->
+    <!-- ================================================================= -->
+    <div class="view-switcher-bar" [class.scrolled-hidden]="isScrolledDown()">
+        <div class="switcher-pill">
+            <button class="switcher-btn" [class.active]="viewMode() === 'states'" (click)="setViewMode('states')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+                    <line x1="8" y1="2" x2="8" y2="18"></line>
+                    <line x1="16" y1="6" x2="16" y2="22"></line>
+                </svg>
+                <span>3D State Chronicles</span>
+            </button>
+
+            <button class="switcher-btn" [class.active]="viewMode() === 'canvas'" (click)="setViewMode('canvas')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Floating Canvas</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- MODE 1: 3D STATE-WISE BHARAT YATRA (PORTFOLIO THEME)              -->
+    <!-- ================================================================= -->
+    @if (viewMode() === 'states') {
+    <div class="states-experience">
+        <div class="ambient-mesh"></div>
+
+        <!-- Sub-Header Bar -->
+        <div class="travel-subnav">
+            <div class="travel-title mono-text">
+                <span class="yatra-badge">BHARAT YATRA</span> &bull; 3D INTERACTIVE TRAVEL CHRONICLES
+                @if (selectedFilterStateId()) {
+                <button class="filter-indicator-badge mono-text" (click)="clearStateFilter()" title="Click to clear state filter">
+                    <span class="filter-dot"></span>
+                    <span>Filtered: {{ getFilterStateName() }}</span>
+                    <span class="clear-cross">✕</span>
+                </button>
+                }
+            </div>
+            <div class="travel-meta">
+                <div class="meta-pill">
+                    Explored: <strong>{{ travelService.exploredStatesCount() }} / 36 States</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="scrolly-container">
+
+            <!-- LEFT: Sticky 3D Map Window -->
+            <aside class="map-stage">
+                <div class="map-3d-stage">
+
+                    <!-- 3D Perspective Controls Bar -->
+                    <div class="map-control-bar">
+                        <span class="map-tagline mono-text">INDIA VECTOR 3D STAGE</span>
+                        <div class="control-actions">
+                            <button class="tilt-toggle-btn mono-text" [class.active]="is3dAngle()"
+                                (click)="toggle3dAngle()" title="Toggle 3D perspective / Flat view">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                    </path>
+                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                </svg>
+                                <span>{{ is3dAngle() ? '3D Tilt' : 'Top View' }}</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 3D Platform Pedestal -->
+                    <div class="map-pedestal-3d" [style.transform]="tiltTransform()"
+                        (mousemove)="onPedestalMouseMove($event)" (mouseleave)="onPedestalMouseLeave()">
+
+                        <!-- Ambient Grid Surface Base -->
+                        <div class="pedestal-grid-surface"></div>
+                        <div class="pedestal-depth-extrusion"></div>
+
+                        <!-- Vector SVG Map of India (All 36 States) -->
+                        <div class="svg-map-wrapper">
+                            <svg [attr.viewBox]="viewBox" class="india-3d-svg" preserveAspectRatio="xMidYMid meet">
+                                <defs>
+                                    <radialGradient id="beaconGlow" cx="50%" cy="50%" r="50%">
+                                        <stop offset="0%" stop-color="#0047FF" stop-opacity="0.8" />
+                                        <stop offset="60%" stop-color="#0047FF" stop-opacity="0.25" />
+                                        <stop offset="100%" stop-color="#0047FF" stop-opacity="0" />
+                                    </radialGradient>
+                                    <filter id="stateDropShadow" x="-10%" y="-10%" width="120%" height="120%">
+                                        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0047FF"
+                                            flood-opacity="0.3" />
+                                    </filter>
+                                </defs>
+
+                                <!-- Base Silhouette Shadow for 3D depth -->
+                                <g class="shadow-silhouette-group" transform="translate(4, 8)">
+                                    @for (state of allStates; track state.id) {
+                                    <path [attr.d]="state.path" class="silhouette-path" />
+                                    }
+                                </g>
+
+                                <!-- All 36 Interactive State Polygons -->
+                                <g class="states-layer">
+                                    @for (state of allStates; track state.id) {
+                                    <path [attr.d]="state.path" [id]="'svg-state-' + state.id" class="state-polygon"
+                                        [class.active-state]="activeStateId() === state.id"
+                                        [class.hovered-state]="hoveredState()?.id === state.id"
+                                        [class.filtered-state]="selectedFilterStateId() === state.id"
+                                        [class.has-stories]="hasMemories(state.id)"
+                                        (mouseenter)="onStateHover(state, $event)"
+                                        (mousemove)="onStateMouseMove($event)" (mouseleave)="onStateLeave()"
+                                        (click)="onStateClick(state)" />
+                                    }
+                                </g>
+
+                                <!-- State Pulsing Beacons (on states with memories) -->
+                                <g class="beacons-layer">
+                                    @for (state of allStates; track state.id) {
+                                    @if (hasMemories(state.id)) {
+                                    <g class="state-beacon-node" [class.active]="activeStateId() === state.id"
+                                        (click)="scrollToState(state.id)">
+                                        <circle [attr.cx]="state.cx" [attr.cy]="state.cy" r="14"
+                                            class="beacon-pulse-ring" />
+                                        <circle [attr.cx]="state.cx" [attr.cy]="state.cy" r="7" class="beacon-halo" />
+                                        <circle [attr.cx]="state.cx" [attr.cy]="state.cy" r="3.5"
+                                            class="beacon-center-dot" />
+                                    </g>
+                                    }
+                                    }
+                                </g>
+                            </svg>
+                        </div>
+
+                    </div>
+
+                    <!-- Interactive Floating State HUD / Tooltip -->
+                    @if (hoveredState(); as hState) {
+                    <div class="state-hover-hud mono-text" [style.left.px]="tooltipPos().x"
+                        [style.top.px]="tooltipPos().y">
+                        <div class="hud-header">
+                            <span class="hud-state-name">{{ hState.name }}</span>
+                            @if (hasMemories(hState.id)) {
+                            <span class="hud-badge visited">Explored &bull; {{ getMemoriesCount(hState.id) }}
+                                Photos</span>
+                            } @else {
+                            <span class="hud-badge pending">Not visited yet</span>
+                            }
+                        </div>
+                        <div class="hud-action">
+                            @if (hasMemories(hState.id)) {
+                            <span>Click to filter stories &rarr;</span>
+                            } @else {
+                            <span>Unexplored Territory</span>
+                            }
+                        </div>
+                    </div>
+                    }
+
+                    <!-- Bottom Guide & Instructions -->
+                    <div class="map-footer-guide mono-text">
+                        <div class="guide-item">
+                            <span class="legend-dot explored"></span>
+                            <span>Explored State</span>
+                        </div>
+                        <div class="guide-item">
+                            <span class="legend-dot active"></span>
+                            <span>Currently In View</span>
+                        </div>
+                        <div class="guide-item">
+                            <span class="legend-dot pending"></span>
+                            <span>Hover Any State</span>
+                        </div>
+                    </div>
+
+                </div>
+            </aside>
+
+            <!-- RIGHT: Scrollable Travel Stories Feed -->
+            <main class="feed-stage">
+                <div class="hero-intro">
+                    <span class="hero-eyebrow mono-text">VISUAL EXPEDITIONS</span>
+                    <h1 class="travel-heading">Chronicles Across The Subcontinent</h1>
+                    <p class="travel-subtext">
+                        An interactive photographic exploration across Indian states. Hover over states on the 3D map to
+                        preview boundaries and memories, or click any photo to enter full-screen view.
+                    </p>
+                </div>
+
+                <!-- STATE FILTER BAR -->
+                <div class="state-filter-bar">
+                    <div class="filter-header">
+                        <div class="filter-title-group">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                            </svg>
+                            <span class="filter-label mono-text">FILTER BY EXPLORED STATE</span>
+                        </div>
+                        @if (selectedFilterStateId()) {
+                        <button class="clear-all-btn mono-text" (click)="clearStateFilter()">
+                            <span>Clear Filter</span>
+                            <span>✕</span>
+                        </button>
+                        }
+                    </div>
+
+                    <div class="filter-pills-row">
+                        <button class="filter-pill" [class.active]="selectedFilterStateId() === null"
+                            (click)="clearStateFilter()">
+                            <span>All States</span>
+                            <span class="pill-count">{{ travelService.memories().length }}</span>
+                        </button>
+                        @for (st of statesWithMemories(); track st.id) {
+                        <button class="filter-pill" [class.active]="selectedFilterStateId() === st.id"
+                            (click)="filterByState(st.id)">
+                            <span>{{ st.name }}</span>
+                            <span class="pill-count">{{ getMemoriesCount(st.id) }}</span>
+                        </button>
+                        }
+                    </div>
+
+                    @if (selectedFilterStateId(); as filtId) {
+                    <div class="active-filter-alert">
+                        <div class="alert-info">
+                            <span>📍 Showing memories exclusively from <strong>{{ getFilterStateName() }}</strong>
+                                ({{ filteredMemories().length }} photos)</span>
+                        </div>
+                        <button class="reset-link" (click)="clearStateFilter()">Show all Indian states</button>
+                    </div>
+                    }
+                </div>
+
+                @if (filteredMemories().length === 0) {
+                <div class="no-memories-box">
+                    <p class="mono-text">No memories recorded yet for this state.</p>
+                </div>
+                }
+
+                @for (mem of filteredMemories(); track mem.id) {
+                <section class="travel-card" [id]="'card-' + mem.id" [attr.data-state-id]="mem.stateId"
+                    [class.in-view]="activeStateId() === mem.stateId">
+                    <div class="card-box">
+                        <div class="photo-display" (click)="openPreview(mem.image, 'states', $event)"
+                            title="Click to view photo in fullscreen">
+                            <img [src]="mem.image" [alt]="mem.title + ' Photography'" loading="lazy" />
+                            <span class="photo-tag mono-text">{{ mem.tag }}</span>
+
+                            <div class="photo-zoom-hint">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <polyline points="9 21 3 21 3 15"></polyline>
+                                    <line x1="21" y1="3" x2="14" y2="10"></line>
+                                    <line x1="3" y1="21" x2="10" y2="14"></line>
+                                </svg>
+                                <span>Enlarge</span>
+                            </div>
+                        </div>
+
+                        <div class="card-content">
+                            <div class="card-header">
+                                <div class="title-with-pin">
+                                    <span class="state-dot"></span>
+                                    <h2 class="state-title">{{ mem.stateName }}</h2>
+                                </div>
+                                <span class="travel-date mono-text">{{ mem.month }}</span>
+                            </div>
+
+                            <h3 class="story-headline">{{ mem.title }}</h3>
+                            <p class="caption">{{ mem.caption }}</p>
+
+                            <div class="moments-list">
+                                @for (moment of mem.moments; track moment) {
+                                <span class="moment-pill mono-text">{{ moment }}</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                }
+            </main>
+        </div>
+    </div>
+    }
+
+    <!-- ================================================================= -->
+    <!-- MODE 2: ORIGINAL FLOATING CANVAS VIEW                             -->
+    <!-- ================================================================= -->
+    @if (viewMode() === 'canvas') {
     <main class="blur-content">
         <div class="hero-text">
             <h1>Hobbies</h1>
             <h3>Experimental Photography Display Typeface</h3>
-            <div class="pill">COMING SOON</div>
+            <div class="pill">DRAG CANVAS &bull; CLICK PHOTO TO ENLARGE</div>
         </div>
 
-        <div class="stamps-container">
-            <div *ngFor="let stamp of stamps" class="stamp-card" [style.zIndex]="stamp.zIndex"
-                [style.transform]="getTransform(stamp)">
-                <img [src]="stamp.image" alt="Stamp Art" loading="lazy">
+        <div class="stamps-container"
+            [style.transform]="'translate3d(' + panX() + 'px,' + panY() + 'px,0)'">
+            @for (stamp of stamps; track stamp.id) {
+            <div class="stamp-card" [style.zIndex]="stamp.zIndex"
+                [style.transform]="getTransform(stamp)"
+                (click)="openPreview(stamp.image, 'canvas', $event)">
+                <img [src]="stamp.image" alt="Photography Stamp" loading="lazy">
+                <div class="stamp-hover-hint">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <polyline points="9 21 3 21 3 15"></polyline>
+                        <line x1="21" y1="3" x2="14" y2="10"></line>
+                        <line x1="3" y1="21" x2="10" y2="14"></line>
+                    </svg>
+                </div>
             </div>
+            }
+        </div>
+
+
+        <div class="blur-footer">
+            <span class="scroll-indicator">[ PAN AROUND TO EXPLORE ARCHIVE ]</span>
         </div>
     </main>
+    }
 
-    <footer class="blur-footer">
-        <div class="scroll-indicator">
-            SCROLL / DRAG TO MOVE
+    <!-- ================================================================= -->
+    <!-- FLOATING SCROLL TO TOP BUTTON                                     -->
+    <!-- ================================================================= -->
+    @if (isScrolledDown()) {
+    <button class="scroll-to-top-btn" (click)="scrollToTop()" title="Go to top of page" aria-label="Go to top of page">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+        <span class="scroll-top-label mono-text">TOP</span>
+    </button>
+    }
+
+    <!-- ================================================================= -->
+    <!-- FULLSCREEN LIGHTBOX MODAL                                         -->
+    <!-- ================================================================= -->
+    @if (selectedImage()) {
+    <div class="lightbox-backdrop" (click)="closePreview()">
+
+        <button class="lightbox-close-btn" (click)="closePreview()" aria-label="Close fullscreen preview">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <span class="hint-key">ESC</span>
+        </button>
+
+        @if (currentPreviewList().length > 1) {
+        <button class="lightbox-nav-btn prev-btn" (click)="prevImage($event)" aria-label="Previous image">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+
+        <button class="lightbox-nav-btn next-btn" (click)="nextImage($event)" aria-label="Next image">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+        }
+
+        <div class="lightbox-image-box" (click)="$event.stopPropagation()">
+            <img [src]="selectedImage()" alt="Fullscreen Photography" class="lightbox-img" />
+
+            <div class="lightbox-info-bar mono-text">
+                <span class="lightbox-counter">{{ currentIndex() + 1 }} / {{ currentPreviewList().length }}</span>
+                <span class="lightbox-zoom-tag">Full Resolution View</span>
+            </div>
         </div>
-    </footer>
+    </div>
+    }
+
 </div>

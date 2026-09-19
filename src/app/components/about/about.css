@@ -2,13 +2,13 @@
 .about-section {
     width: 100%;
     min-height: 100vh;
-    background: #ffffff;
+    background: var(--bg-color);
     padding-top: 15vh;
     padding-bottom: 5rem;
     font-family: var(--font-primary, 'Inter', sans-serif);
-    color: #383838;
+    color: var(--text-primary);
     overflow-x: hidden;
-    /* Prevent horizontal scroll */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .about-container {
@@ -25,22 +25,26 @@
 /* Common Dividers */
 .divider {
     height: 1px;
-    background-color: #E5E5E5;
+    background-color: var(--border-color);
     width: 100%;
     margin: 10px 0;
+    transition: background-color 0.3s ease;
 }
 
 .divider-light {
     height: 1px;
-    background-color: #F5F5F5;
+    background-color: var(--border-color);
     width: 100%;
     margin: 24px 0;
+    opacity: 0.5;
+    transition: background-color 0.3s ease;
 }
 
 .card-divider {
     height: 1px;
-    background-color: #F5F5F5;
+    background-color: var(--border-color);
     width: 100%;
+    opacity: 0.5;
 }
 
 /* --- Hero Section --- */
@@ -135,33 +139,7 @@
     text-transform: uppercase;
 }
 
-/* --- CTA & Branding --- */
-.cta-row {
-    display: flex;
-    justify-content: center;
-    margin: 40px 0;
-}
 
-.btn-download {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    border: 1px solid #E5E5E5;
-    border-radius: 4px;
-    color: #383838;
-    font-family: var(--font-mono);
-    font-size: 14px;
-    font-weight: 400;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    background: transparent;
-}
-
-.btn-download:hover {
-    border-color: #333;
-    background: transparent;
-}
 
 .branding-header {
     text-align: center;
@@ -503,35 +481,65 @@
     text-transform: uppercase;
 }
 
-/* --- CTA & Branding --- */
+/* --- CTA Buttons (Download CV, Email, LinkedIn, GitHub) --- */
 .cta-row {
     display: flex;
-    justify-content: center;
-    margin: 40px 0;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 28px 0 12px 0;
 }
 
-.btn-download {
+.btn-action {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-    padding: 12px 24px;
-    border: 1px solid #e5e5e5;
+    height: 42px;
+    padding: 0 18px;
     border-radius: 8px;
-    color: #4f46e5;
     font-family: var(--font-mono);
-    font-size: 14px;
+    font-size: 13.5px;
     font-weight: 500;
     text-decoration: none;
-    transition: all 0.2s ease;
-    background: #ffffff;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+    cursor: pointer;
 }
 
-.btn-download:hover {
-    background: #fafafa;
-    border-color: #d4d4d4;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+.btn-primary {
+    background: #0a0a0a;
+    color: #ffffff;
+    border: 1px solid #0a0a0a;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.btn-primary:hover {
+    background: #262626;
+    border-color: #262626;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+.btn-secondary {
+    background: #ffffff;
+    color: #262626;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.btn-secondary:hover {
+    background: #f9f9f9;
+    color: #0a0a0a;
+    border-color: #171717;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.btn-action svg {
+    flex-shrink: 0;
 }
 
 .branding-header {
@@ -716,8 +724,60 @@
     margin-left: 0;
 }
 
+/* --- Education Section --- */
+.education-card {
+    background-color: #fafafa;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 24px;
+    transition: all 0.2s ease;
+}
 
+.education-card:hover {
+    border-color: #171717;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
 
+.edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.edu-degree {
+    font-family: var(--font-mono);
+    font-size: 17px;
+    font-weight: 600;
+    color: #171717;
+    margin-bottom: 4px;
+}
+
+.edu-institution {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: #525252;
+}
+
+.edu-year {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: #737373;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    padding: 4px 12px;
+    border-radius: 100px;
+    white-space: nowrap;
+}
+
+.edu-desc {
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    color: #737373;
+    line-height: 1.6;
+    margin: 0;
+}
 
 /* --- Responsive --- */
 @media (max-width: 900px) {
@@ -745,6 +805,10 @@
     .stat-number {
         font-size: 42px;
     }
+
+    .cta-row {
+        justify-content: center;
+    }
 }
 
 @media (max-width: 600px) {
@@ -761,5 +825,166 @@
 
     .about-container {
         padding: 0 24px;
+    }
+}
+
+/* =============================================
+   DARK MODE OVERRIDES — About Section
+   ============================================= */
+
+[data-theme="dark"] .about-section {
+    background: radial-gradient(ellipse at 30% 10%, rgba(99, 102, 241, 0.07) 0%, transparent 50%),
+                var(--bg-color);
+}
+
+[data-theme="dark"] .intro-statement {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .bio-text {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .stat-number {
+    color: #a5b4fc;
+}
+
+[data-theme="dark"] .stat-label {
+    color: var(--text-muted);
+}
+
+[data-theme="dark"] .skills-card {
+    background: var(--card-surface);
+    border-color: var(--border-color);
+    backdrop-filter: blur(12px);
+}
+
+[data-theme="dark"] .skill-header {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .skill-list li {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .skill-list li::before {
+    color: var(--accent-color);
+    opacity: 0.5;
+}
+
+[data-theme="dark"] .stack-grid {
+    background: var(--card-surface);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .stack-item:hover {
+    background: var(--card-hover);
+}
+
+[data-theme="dark"] .stack-name {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .stack-desc {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .education-card {
+    background: var(--card-surface);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .education-card:hover {
+    border-color: var(--accent-color);
+    box-shadow: var(--shadow-accent);
+}
+
+[data-theme="dark"] .edu-degree {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .edu-institution {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .edu-year {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--text-muted);
+}
+
+[data-theme="dark"] .edu-desc {
+    color: var(--text-muted);
+}
+
+[data-theme="dark"] .branding-header {
+    color: var(--text-muted);
+}
+
+[data-theme="dark"] .btn-primary {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #ffffff;
+}
+
+[data-theme="dark"] .btn-primary:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+    box-shadow: var(--shadow-accent);
+}
+
+[data-theme="dark"] .btn-secondary {
+    background: rgba(99, 102, 241, 0.08);
+    color: #a5b4fc;
+    border-color: rgba(99, 102, 241, 0.25);
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+    background: rgba(99, 102, 241, 0.15);
+    color: #c7d2fe;
+    border-color: var(--accent-color);
+}
+
+[data-theme="dark"] .logo-item img {
+    filter: grayscale(100%) opacity(0.4) invert(1);
+}
+
+[data-theme="dark"] .logo-item:hover img {
+    filter: grayscale(0%) opacity(0.9) invert(0);
+}
+
+/* =============================================
+   EXTRA MOBILE RESPONSIVE — About
+   ============================================= */
+
+@media (max-width: 480px) {
+    .about-section {
+        padding-top: 10vh;
+    }
+
+    .about-container {
+        padding: 0 1rem;
+    }
+
+    .stat-number {
+        font-size: 28px;
+    }
+
+    .skills-card {
+        padding: 24px 20px;
+    }
+
+    .stack-grid {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+    .cta-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-action {
+        justify-content: center;
     }
 }

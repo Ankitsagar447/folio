@@ -1,0 +1,48 @@
+<section class="projects-section">
+    <div class="projects-container">
+        <div class="projects-header">
+            <h2 class="section-heading">Featured Enterprise Projects</h2>
+            <p class="section-subheading">
+                Key software platforms, low-code builders, and enterprise solutions developed and maintained across my career.
+            </p>
+        </div>
+
+        <div class="projects-grid">
+            @for (project of projects; track project.id) {
+            <a [routerLink]="['/projects', project.id]" class="project-card">
+                <div class="card-inner">
+                    <div class="card-meta">
+                        <span class="card-category">{{ project.category }}</span>
+                        <span class="card-year mono-text">[{{ project.year }}]</span>
+                    </div>
+
+                    <h3 class="card-title">{{ project.title }}</h3>
+                    <div class="card-company mono-text">{{ project.company }}</div>
+
+                    <p class="card-desc">{{ project.description }}</p>
+
+                    <div class="card-tech-list">
+                        @for (tech of project.technologies.slice(0, 5); track tech) {
+                        <span class="tech-badge">{{ tech }}</span>
+                        }
+                        @if (project.technologies.length > 5) {
+                        <span class="tech-badge more-badge">+{{ project.technologies.length - 5 }} more</span>
+                        }
+                    </div>
+
+                    <div class="card-footer-action">
+                        <span class="view-case-study">
+                            Explore Case Study
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </a>
+            }
+        </div>
+    </div>
+</section>

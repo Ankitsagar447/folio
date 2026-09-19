@@ -1,0 +1,145 @@
+<div class="admin-page">
+  <!-- Topbar -->
+  <header class="admin-topbar">
+    <div class="admin-brand mono-text">
+      <span class="brand-dot"></span>
+      <span>Admin Studio</span>
+    </div>
+    <div class="admin-actions">
+      <button class="btn-outline mono-text" (click)="goToPortfolio()">← View Portfolio</button>
+      <button class="btn-danger mono-text" (click)="logout()">Logout</button>
+    </div>
+  </header>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-value">{{ memories().length }}</div>
+      <div class="stat-label mono-text">Total Memories</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">{{ exploredCount() }}</div>
+      <div class="stat-label mono-text">States Explored</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">{{ allStates.length }}</div>
+      <div class="stat-label mono-text">Total States/UTs</div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tab-row">
+    <button class="tab-btn mono-text" [class.active]="activeTab() === 'add'" (click)="activeTab.set('add')">
+      + Add Memory
+    </button>
+    <button class="tab-btn mono-text" [class.active]="activeTab() === 'manage'" (click)="activeTab.set('manage')">
+      Manage ({{ memories().length }})
+    </button>
+  </div>
+
+  <!-- Feedback -->
+  @if (formFeedback(); as fb) {
+    <div class="feedback-banner" [class.success]="fb.type === 'success'" [class.error]="fb.type === 'error'" class="mono-text">
+      {{ fb.message }}
+    </div>
+  }
+
+  <!-- Add Memory Tab -->
+  @if (activeTab() === 'add') {
+    <div class="admin-form-card">
+      <h2 class="form-title mono-text">Publish New Memory</h2>
+
+      <div class="form-grid">
+        <div class="form-field">
+          <label class="field-label mono-text">State / UT</label>
+          <select class="field-input mono-text" [ngModel]="formStateId()" (ngModelChange)="formStateId.set($event)">
+            @for (state of allStates; track state.id) {
+              <option [value]="state.id">{{ state.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label class="field-label mono-text">Title</label>
+          <input type="text" class="field-input mono-text" placeholder="Journey title..."
+            [ngModel]="formTitle()" (ngModelChange)="formTitle.set($event)" />
+        </div>
+
+        <div class="form-field">
+          <label class="field-label mono-text">Month / Year</label>
+          <input type="text" class="field-input mono-text" placeholder="e.g. Jan 2024"
+            [ngModel]="formMonth()" (ngModelChange)="formMonth.set($event)" />
+        </div>
+
+        <div class="form-field">
+          <label class="field-label mono-text">Tag</label>
+          <input type="text" class="field-input mono-text" placeholder="e.g. Mountain Trek"
+            [ngModel]="formTag()" (ngModelChange)="formTag.set($event)" />
+        </div>
+
+        <div class="form-field full-width">
+          <label class="field-label mono-text">Expedition Photo (Upload File or Paste Image URL)</label>
+          <div class="upload-options-row">
+            <input type="file" id="adminFileInput" class="file-upload-input" accept="image/*" (change)="onFileSelected($event)" style="display: none;">
+            <label for="adminFileInput" class="upload-file-btn mono-text">
+              📁 Choose Local Image File
+            </label>
+            <span class="or-separator mono-text">OR</span>
+            <input type="url" class="field-input mono-text" placeholder="Paste image URL (https://...)"
+              [ngModel]="formImageUrl()" (ngModelChange)="formImageUrl.set($event); formImagePreview.set($event)" />
+          </div>
+
+          @if (formImagePreview()) {
+          <div class="image-preview-card">
+            <img [src]="formImagePreview()" alt="Preview" class="preview-thumb" />
+            <div class="preview-info mono-text">
+              <span>Image loaded & ready</span>
+              <button type="button" class="btn-clear-preview" (click)="formImagePreview.set(''); formImageUrl.set('')">✕ Clear</button>
+            </div>
+          </div>
+          }
+        </div>
+
+        <div class="form-field full-width">
+          <label class="field-label mono-text">Caption</label>
+          <textarea class="field-input field-textarea mono-text" placeholder="A short description..."
+            [ngModel]="formCaption()" (ngModelChange)="formCaption.set($event)"></textarea>
+        </div>
+
+        <div class="form-field full-width">
+          <label class="field-label mono-text">Moments (comma separated)</label>
+          <input type="text" class="field-input mono-text" placeholder="🏔️ Trekking, 🌅 Sunrise, 📸 Photography"
+            [ngModel]="formMoments()" (ngModelChange)="formMoments.set($event)" />
+        </div>
+      </div>
+
+      <button class="btn-primary mono-text" (click)="saveMemory()">
+        Publish Memory →
+      </button>
+    </div>
+  }
+
+  <!-- Manage Tab -->
+  @if (activeTab() === 'manage') {
+    <div class="memories-list">
+      @if (memories().length === 0) {
+        <div class="empty-state mono-text">No memories yet. Add your first travel memory above.</div>
+      }
+      @for (mem of memories(); track mem.id) {
+        <div class="memory-card">
+          <img [src]="mem.image" [alt]="mem.title" class="memory-img" />
+          <div class="memory-info">
+            <div class="memory-state mono-text">{{ mem.stateName }}</div>
+            <div class="memory-title">{{ mem.title }}</div>
+            <div class="memory-meta mono-text">{{ mem.month }} · {{ mem.tag }}</div>
+          </div>
+          <button class="btn-delete mono-text" (click)="deleteMemory(mem.id)">Delete</button>
+        </div>
+      }
+
+      @if (memories().length > 0) {
+        <button class="btn-reset mono-text" (click)="resetDefaults()">Reset to Defaults</button>
+      }
+    </div>
+  }
+</div>

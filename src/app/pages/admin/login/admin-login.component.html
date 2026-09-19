@@ -1,0 +1,49 @@
+<div class="admin-login-page">
+  <div class="login-card">
+    <div class="login-brand">
+      <span class="brand-dot"></span>
+      <span class="brand-text mono-text">Admin Studio</span>
+    </div>
+
+    <h1 class="login-title">Welcome Back</h1>
+    <p class="login-sub mono-text">Portfolio Admin — Ankit Sagar</p>
+
+    <form class="login-form" (ngSubmit)="login()">
+      <div class="field-group">
+        <label class="field-label mono-text">Email</label>
+        <input
+          type="email"
+          class="field-input mono-text"
+          placeholder="admin@portfolio.com"
+          [ngModel]="email()"
+          (ngModelChange)="email.set($event)"
+          name="email"
+          required
+        />
+      </div>
+
+      <div class="field-group">
+        <label class="field-label mono-text">Password</label>
+        <input
+          type="password"
+          class="field-input mono-text"
+          placeholder="••••••••"
+          [ngModel]="password()"
+          (ngModelChange)="password.set($event)"
+          name="password"
+          required
+        />
+      </div>
+
+      @if (error()) {
+        <div class="error-msg mono-text">{{ error() }}</div>
+      }
+
+      <button type="submit" class="login-btn mono-text" [disabled]="loading()">
+        @if (loading()) { Authenticating... } @else { Sign In → }
+      </button>
+    </form>
+
+    <p class="login-hint mono-text">Credentials: admin&#64;portfolio.com / admin123</p>
+  </div>
+</div>

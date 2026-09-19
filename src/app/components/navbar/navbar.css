@@ -1,50 +1,59 @@
+/* =========================================================
+   NAVBAR — Responsive + Theme-Aware
+   ========================================================= */
+
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 60px;
-    /* Tighter height */
-    background: #ffffffed;
-    /* Fully transparent initially */
+    height: var(--header-height, 60px);
+    background: var(--navbar-bg);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     z-index: 1000;
     display: flex;
-    align-items: center;
-    transition: background 0.3s ease;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    /* Added subtle border */
+    flex-direction: column;
+    align-items: stretch;
+    transition: background 0.3s ease, border-color 0.3s ease;
+    border-bottom: 1px solid var(--navbar-border);
 }
-
-/* Optional: Add a slight background on scroll via JS if needed, but ref is transparent/vignette */
 
 .navbar-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100%;
+    height: var(--header-height, 60px);
     max-width: var(--container-width);
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 1.5rem;
+    width: 100%;
+    position: relative;
 }
 
-/* Logo Styles */
+/* --- Logo --- */
 .logo-wrapper {
     display: flex;
     align-items: center;
-    gap: 0;
     text-decoration: none;
     font-family: var(--font-mono);
     font-size: 16px;
     font-weight: 500;
     letter-spacing: -0.48px;
-    color: rgb(56, 56, 56);
+    color: var(--logo-color);
+    z-index: 10;
 }
 
 .logo-text {
-    color: rgb(56, 56, 56);
+    color: var(--logo-color);
+    transition: color 0.2s ease;
 }
 
-/* Nav Links - Center */
+.logo-wrapper:hover .logo-text {
+    opacity: 0.75;
+}
+
+/* --- Desktop Nav Links (center) --- */
 .nav-center {
     position: absolute;
     left: 50%;
@@ -54,11 +63,8 @@
 .nav-links {
     display: flex;
     gap: 24px;
-    /* Exact spacing */
     padding: 0;
     margin: 0;
-    background: transparent;
-    /* No background on pill in ref */
 }
 
 .nav-links a {
@@ -66,33 +72,226 @@
     font-size: 14px;
     font-weight: 500;
     letter-spacing: -0.42px;
-    color: rgb(148, 148, 148);
-    /* Inactive color */
+    color: var(--nav-link-color);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-    color: rgb(56, 56, 56);
+    color: var(--nav-link-active);
 }
 
 .nav-links li {
     list-style: none;
 }
 
-/* Time Display */
+/* --- Right Side --- */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 10;
+}
+
+/* --- Time Display --- */
 .time-display {
     font-family: var(--font-mono);
-    font-size: 15px;
-    color: rgb(148, 148, 148);
+    font-size: 13px;
+    color: var(--time-color);
     font-weight: 400;
-    letter-spacing: -0.6px;
+    letter-spacing: -0.5px;
+}
+
+/* --- Theme Toggle Button --- */
+.theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: var(--card-surface);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: var(--shadow-sm);
+    flex-shrink: 0;
+}
+
+.theme-toggle-btn:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    transform: rotate(15deg) scale(1.1);
+    box-shadow: var(--shadow-accent);
+}
+
+[data-theme="dark"] .theme-toggle-btn {
+    background: rgba(99, 102, 241, 0.1);
+    border-color: rgba(99, 102, 241, 0.25);
+    color: #a5b4fc;
+}
+
+[data-theme="dark"] .theme-toggle-btn:hover {
+    background: rgba(99, 102, 241, 0.2);
+    border-color: #6366f1;
+    color: #c7d2fe;
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+}
+
+/* --- Hamburger Button (Mobile only) --- */
+.hamburger-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    cursor: pointer;
     background: transparent;
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.hamburger-btn:hover {
+    border-color: var(--accent-color);
+    background: var(--glow-accent);
+}
+
+.ham-line {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--text-secondary);
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: center;
+}
+
+.hamburger-btn.open .ham-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.hamburger-btn.open .ham-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+.hamburger-btn.open .ham-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* --- Mobile Drawer --- */
+.mobile-drawer {
+    display: none;
+    position: fixed;
+    top: var(--header-height, 60px);
+    left: 0;
+    right: 0;
+    background: var(--navbar-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 1.5rem 1.5rem;
+    transform: translateY(-110%);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 999;
+}
+
+.mobile-drawer.open {
+    transform: translateY(0);
+}
+
+.mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-nav-links li {
+    list-style: none;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.mobile-nav-links li:last-child {
+    border-bottom: none;
+}
+
+.mobile-nav-links a {
+    display: block;
+    padding: 0.9rem 0;
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--nav-link-color);
+    text-decoration: none;
+    letter-spacing: -0.4px;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.mobile-nav-links a:hover,
+.mobile-nav-links a.active {
+    color: var(--accent-color);
+    padding-left: 8px;
+}
+
+.mobile-footer {
+    margin-top: 1.2rem;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* --- Mobile Backdrop --- */
+.mobile-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 998;
+    backdrop-filter: blur(2px);
+}
+
+/* =============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================= */
+
+@media (max-width: 900px) {
+    .time-display {
+        display: none;
+    }
 }
 
 @media (max-width: 768px) {
     .nav-center {
         display: none;
+    }
+
+    .hamburger-btn {
+        display: flex;
+    }
+
+    .mobile-drawer {
+        display: block;
+    }
+
+    .mobile-backdrop {
+        display: block;
+    }
+
+    .navbar-container {
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .theme-toggle-btn {
+        width: 32px;
+        height: 32px;
     }
 }
